@@ -1,7 +1,11 @@
+/// <reference types="cypress" />
+import All from '../PageObjects/All'
+
+const all=new All()
 
 context('kreditnyjKalkulyator', () => {
   beforeEach(() => {
-    cy.visit('https://fincalculator.ru/kreditnyj-kalkulyator')
+    all.visit()
   })
 
   //проверка заголовка страницы "Кредитный калькулятор"
@@ -11,13 +15,10 @@ context('kreditnyjKalkulyator', () => {
 
   //чекбокс "учитывать инфляцию"
   it('UI - 2', () => {
-    cy.get('input.pull-right[name="inflationParameters.isDiscounted"]')
-        .not('[disabled]')
-        .check()
-        .should('be.checked')
-    cy.get('button:contains("Рассчитать")').not('[disabled]').click()
-    cy.get('span.pull-left[data-bind="text : decimalToString(inflationTotalAmount)"]').should('be.visible')
-    cy.get('div:nth-child(6) > div.all-column6.result-value.inflation > span').should('be.visible')
+    all.selectInflation()
+    all.clickConfirm()
+    all.overpaymentWithInflation()
+    all.totalpaymentsWithInflation()
   })
 
   // Ввести и рассчитать
@@ -25,6 +26,7 @@ context('kreditnyjKalkulyator', () => {
     cy.get('input.all-column12[name="loanParameters.amount"]').type('3000000')
     cy.get('button:contains("Рассчитать")').not('[disabled]').click()
     cy.get('span.pull-left[data-bind="text : decimalToString(totalAmount)"]').should('be.visible')
+        //.should('eq',"3 305 561,13")
   })
 
 })

@@ -8,7 +8,7 @@ describe('API tests', () => {
         })
     })
 
-    it('ApI - 0', () => {
+    it('ApI - 2', () => {
         cy.fixture('credit').then(credit => {
             cy.request('POST', 'calculators/CalculateLoan', credit ).then((response) => {
                 expect(response.status).to.eq(200)
@@ -18,16 +18,14 @@ describe('API tests', () => {
                 // expect(response.body).to.deep.equal('amount', credit.amount)
                 // expect(response.body).to.deep.equal('period',credit.period)
                 // expect(response.body).to.deep.equal('rate',credit.rate)
-
             })
         })
     })
 
-    it('ApI - 2', () => {
+    it('ApI - 3', () => {
         const item = {"amount": "7000000"}
         cy.request('POST', '/calculators/CalculateLoan', item)
             .its('body')
-            //.its('data')
             .should('deep.equal', item)
     })
 })
