@@ -18,15 +18,15 @@ context('kreditnyjKalkulyator', () => {
     all.selectInflation()
     all.clickConfirm()
     all.overpaymentWithInflation()
-    all.totalpaymentsWithInflation()
+    all.totalPaymentsWithInflation()
   })
 
   // Ввести и рассчитать
   it('UI - 3', () => {
-    cy.get('input.all-column12[name="loanParameters.amount"]').type('3000000')
-    cy.get('button:contains("Рассчитать")').not('[disabled]').click()
-    cy.get('span.pull-left[data-bind="text : decimalToString(totalAmount)"]').should('be.visible')
-        //.should('eq',"3 305 561,13")
+    all.insertSum('3000000')
+    all.clickConfirm()
+    all.calculateButtom()
+    all.totalPayments()//.should('eq',"3 305 561,13")
   })
 
 })

@@ -5,9 +5,9 @@ class All {
         cy.visit('https://fincalculator.ru/kreditnyj-kalkulyator')
     }
 
-    bottomPanel(value) {
-        const buttom = cy.get()
-        buttom.click()
+    calculateButtom(value) {
+        const button = cy.get('button:contains("Рассчитать")')
+        button.not('[disabled]').click()
         return this
     }
 
@@ -29,13 +29,19 @@ class All {
         return this
     }
 
-    totalpaymentsWithInflation(){
+    totalPaymentsWithInflation(){
         const field = cy.get('span.pull-left[data-bind="text : decimalToString(inflationTotalAmount)"]')
         field.should('be.visible')
         return this
     }
     overpaymentWithInflation(){
         const field =cy.get('div:nth-child(6) > div.all-column6.result-value.inflation > span')
+        field.should('be.visible')
+        return this
+    }
+
+    totalPayments(){
+        const field =cy.get('span.pull-left[data-bind="text : decimalToString(totalAmount)"]')
         field.should('be.visible')
         return this
     }
