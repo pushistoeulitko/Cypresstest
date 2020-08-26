@@ -1,5 +1,32 @@
 {
-      "amount": "6000000",
-      "period": "360",
-      "rate": "0.135"
+      "name": "",
+
+      "loanParameters": {
+            "amount": 6000000,
+            "rateType": 1,
+            "rate": 0.25,
+            "periodType": 1,
+            "changedByDateRates": [],
+            "period": 180,
+            "date": "20200825",
+            "paymentType": 1,
+            "paymentRoundType": 1,
+            "paymentDateType": 1,
+            "onlyPercentFirstly": false,
+            "tuneMonthAnnuity": false,
+            "onlyPercentPeriod": 12,
+            "mortgageCost": 0,
+            "calendarTransferType": 0
+      },
+
+      "commissionParameters": [],
+      "inflationParameters": {
+            "isDiscounted": false,
+            "rate": 0.1,
+            "periodType": 1
+      },
+
+      "loanAdvancedRepayments": [],
+      "effectiveRateType": 1
+
 }

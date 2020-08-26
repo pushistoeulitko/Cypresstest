@@ -1,31 +1,34 @@
+/// <reference types="cypress" />
 
 describe('API tests', () => {
-    Cypress.config('baseUrl','https://fincalculator.ru')
+    Cypress.config('baseUrl', 'https://fincalculator.ru')
 
-    it('ApI - 1', () => {
+
+    it('ApI - 1 - Открытие страницы', () => {
         cy.request('./kreditnyj-kalkulyator').then((response) => {
             expect(response).to.have.property('status', 200)
         })
     })
 
-    it('ApI - 2', () => {
-        cy.fixture('credit').then(credit => {
-            cy.request('POST', 'calculators/CalculateLoan', credit ).then((response) => {
+    it('ApI - 2 - Поля по умолчанию', () => {
+        cy.fixture('loan').then(loan => {
+            cy.request('POST', 'calculators/CalculateLoan', loan).then((response) => {
                 expect(response.status).to.eq(200)
-                expect(response.body).to.have.property('amount',credit.amount)
-                expect(response.body).to.have.property('period',credit.period)
-                expect(response.body).to.have.property('rate',credit.rate)
-                // expect(response.body).to.deep.equal('amount', credit.amount)
-                // expect(response.body).to.deep.equal('period',credit.period)
-                // expect(response.body).to.deep.equal('rate',credit.rate)
+                expect(response.body.total.totalOverpayment).equal(152792.06)
+                expect(response.body.total.totalAmount).equal(1652792.06)
+                expect(response.body.total.xirr).equal(0.12484)
             })
         })
     })
 
-    it('ApI - 3', () => {
-        const item = {"amount": "7000000"}
-        cy.request('POST', '/calculators/CalculateLoan', item)
-            .its('body')
-            .should('deep.equal', item)
+    it('ApI - 3 - Отправка значений не по умолчанию', () => {
+        cy.fixture('credit').then(credit => {
+            cy.request('POST', 'calculators/CalculateLoan', credit).then((response) => {
+                expect(response.status).to.eq(200)
+                expect(response.body.total.totalOverpayment).equal(17038899.54)
+                expect(response.body.total.totalAmount).equal(23038899.54)
+                expect(response.body.total.xirr).equal(0.2498)
+            })
+        })
     })
 })
