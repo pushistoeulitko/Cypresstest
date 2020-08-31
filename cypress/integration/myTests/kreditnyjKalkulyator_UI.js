@@ -22,13 +22,11 @@ context('kreditnyjKalkulyator', () => {
     all.totalPaymentsWithInflation()
   })
 
-  //
   it('UI - 3 Ввод корректных значений в поле "суммы"', () => {
     all.insertSum('3000000')
     all.clickConfirm()
     all.calculateButtom()
     all.totalPayments()
-
   })
 
   it('UI - 4 Ввод корректных значений в поле "суммы"', () => {
@@ -37,11 +35,5 @@ context('kreditnyjKalkulyator', () => {
     all.calculateButtom()
     all.totalPayments()
   })
-
-  //бессполезный, но забавло сворачивается
-  it('UI - 0', () => {
-    cy.get('.antiscroll-content > :nth-child(8) > :nth-child(1)').click()
-    cy.get('.antiscroll-content > :nth-child(8) > :nth-child(2)')
-  })
 })
- 
+
