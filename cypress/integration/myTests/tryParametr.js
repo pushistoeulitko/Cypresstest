@@ -11,7 +11,7 @@ describe('Параметризация кредитного калькулято
                 period: 10,
             }
         },
-
+        
         {
             description: 'hardcore',
             requestData: {
