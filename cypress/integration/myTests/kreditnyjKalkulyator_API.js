@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 
 describe('API tests', () => {
     Cypress.config('baseUrl', 'https://fincalculator.ru')

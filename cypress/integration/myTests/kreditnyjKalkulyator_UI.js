@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+
 import All from '../PageObjects/All'
 
 const all = new All()
@@ -8,12 +8,29 @@ context('kreditnyjKalkulyator', () => {
     all.visit()
   })
 
-  it('UI - 1 - проверка перехода на страницу "Ипотечный калькулятор" (проверка по заголовки и URL)', () => {
+ let data = [
+   {
+     description : 'Ипотечный калькулятор',
+     link : 'ipotechnyj-kalkulyator'
+   },
+   {
+    description : 'Калькулятор автокредита',
+    link : 'kalkulyator-avtokredita'
+   },
+   {
+    description : 'Калькулятор потребительского кредита',
+    link : 'kalkulyator-potrebitelskogo-kredita'
+   }
+ ]
+
+ data.forEach(({description, link }) => {
+  it(`UI - 1 - проверка перехода на страницу - ${description}`, () => {
     cy.title().should('eq', 'Кредитный калькулятор')
-    all.followingLink()
-    cy.title().should('eq', 'Ипотечный калькулятор')
-    cy.url().should('eq', 'https://fincalculator.ru/ipotechnyj-kalkulyator')
+    all.followingLink(link)
+    cy.title().should('eq',  description)
+    cy.url().should('eq', 'https://fincalculator.ru/' + link)
   })
+})
 
   it('UI - 2 - Срабатывание чекбокса "учитывать инфляцию" (по появлению элементов)', () => {
     all.selectInflation()
@@ -29,7 +46,7 @@ context('kreditnyjKalkulyator', () => {
     all.totalPayments()
   })
 
-  it('UI - 4 Ввод корректных значений в поле "суммы"', () => {
+  it('UI - 4 Ввод не корректных значений в поле "суммы"', () => {
     all.insertSum('jhfdsghkjgesrlhj')
     all.clickConfirm()
     all.calculateButtom()

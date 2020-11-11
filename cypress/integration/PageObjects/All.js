@@ -4,9 +4,10 @@ class All {
     visit() {
         cy.visit('https://fincalculator.ru/kreditnyj-kalkulyator')
     }
+    
 
-    followingLink() {
-        const link = cy.get('.relevant-links > [href="https://fincalculator.ru/ipotechnyj-kalkulyator"]')
+    followingLink(sel) {
+        const link = cy.get('.relevant-links > [href="https://fincalculator.ru/' + sel  +'"]')
         link.click()
         return this
     }
