@@ -1,3 +1,8 @@
 # Project exclude paths
 /node_modules/
 /integration/examples/
+/videos/
+/screenshots/
+/plugins/
+.vscode
+.idea
